@@ -1,7 +1,12 @@
 import requests
+import os
+from dotenv import load_dotenv
 
+# Load environment variables from the .env file
+load_dotenv()
+
+api_key = os.getenv("API_KEY")
 # Set up your API key
-api_key = "50cb01a0-0553-48da-bf72-48e7ba853673"
 
 # Set the API endpoint and parameters
 url = "https://api.deepai.org/api/text-generator"
