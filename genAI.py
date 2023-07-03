@@ -1,13 +1,27 @@
-import openai
+import requests
 
-# Set your OpenAI API key
-openai.api_key = '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'
+# Set up your API key
+api_key = "50cb01a0-0553-48da-bf72-48e7ba853673"
 
-response = openai.Completion.create(
-    engine='davinci',
-    prompt='Once upon a time',
-    max_tokens=100
-)
+# Set the API endpoint and parameters
+url = "https://api.deepai.org/api/text-generator"
+headers = {
+    "api-key": api_key,
+    "Content-Type": "application/x-www-form-urlencoded",
+}
+data = {
+    "text": "what is hi",
+}
 
-generated_text = response.choices[0].text.strip()
-print(generated_text)
+# Send the request
+response = requests.post(url, headers=headers, data=data)
+
+# Process the response
+if response.status_code == 200:
+    result = response.json()
+    generated_text = result["output"]
+    print("Generated Text:")
+    print(generated_text)
+else:
+    print("Error:", response.status_code)
+    print(response.text)
